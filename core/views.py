@@ -624,7 +624,7 @@ def delete_backtest(request, backtest_id):
 
 # Update endpoints
 @csrf_exempt
-@require_http_methods(["PUT", "PATCH"])
+@require_http_methods(["PUT", "PATCH", "POST"])
 def update_strategy(request, strategy_id):
     try:
         logger.info(f"Updating strategy {strategy_id}")
@@ -669,9 +669,11 @@ def update_strategy(request, strategy_id):
         return JsonResponse({'error': str(e)}, status=500)
 
 @csrf_exempt
-@require_http_methods(["PUT", "PATCH"])
+@require_http_methods(["PUT", "PATCH", "POST"])
 def update_datafile(request, datafile_id):
     try:
+        print(f"[update_datafile] POST: {request.POST}")
+        print(f"[update_datafile] FILES: {request.FILES}")
         datafile = DataFile.objects.get(id=datafile_id)
         
         # Handle FormData instead of JSON
