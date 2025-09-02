@@ -7,7 +7,7 @@ services:
   - type: web
     name: trading-strategy-backend
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate"
     startCommand: "gunicorn config.wsgi:application"
     envVars:
       - key: DATABASE_URL
@@ -18,5 +18,7 @@ services:
         generateValue: true
       - key: DEBUG
         value: False
+      - key: DJANGO_SETTINGS_MODULE
+        value: config.settings_prod
       - key: PYTHON_VERSION
         value: 3.11.0

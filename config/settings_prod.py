@@ -8,7 +8,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # Allowed hosts
 ALLOWED_HOSTS = [
-    'my-backend.onrender.com',
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'my-backend.onrender.com'),
     'localhost',
     '127.0.0.1',
 ]
